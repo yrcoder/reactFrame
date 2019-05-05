@@ -48,5 +48,7 @@ module.exports = {
 		'react/jsx-indent-props': ['off', 4],
 		'array-callback-return': 'off',
 		'no-tabs': 'off',
+		'no-mixed-spaces-and-tabs': 0,
+		'no-console': 0,
 	},
 };

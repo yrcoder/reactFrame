@@ -12,8 +12,9 @@
     "serve:test": "NODE_ENV=test webpack-dev-server --config ./webpack/webpack.dev.js",
     "serve:prod": "NODE_ENV=prod webpack-dev-server --config ./webpack/webpack.dev.js",
     "build:test": "NODE_ENV=test webpack --config ./webpack/webpack.prod.js",
-    "build": "NODE_ENV=prod webpack  --config ./webpack/webpack.prod.js",
-    "build:dll": "webpack --config ./webpack/webpack.dll.js"
+    "build": "NODE_ENV=prod webpack --config ./webpack/webpack.prod.js",
+    "build:dll": "webpack --config ./webpack/webpack.dll.js",
+    "publish:test": "sh publish.test.sh"
   },
   "author": "李月茹",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "add-asset-html-webpack-plugin": "^3.1.3",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
     "clean-webpack-plugin": "^2.0.1",
     "core-js": "^2.6.5",
     "css-loader": "^2.1.1",

@@ -7,18 +7,6 @@
 		<title>webpack</title>
 	</head>
 	<body>
-		<div id="root" class="red"></div>
+		<div id="root" class="root"></div>
 	</body>
-	<!-- <script src="./views/header.js"></script>
-	<script src="./views/content.js"></script>
-	<script src="./index.js"></script> -->
-
-	<!--
-		1. 要注意js的加载顺序，header和content要在index之前
-		2. 多了2个js文件，页面的加载速度会变慢
-		3. 从index.js文件中看不出文件的位置关系
-
-		* 如果只引用index.js这一个文件就好了。对header和content的引用放在用他们的文件index.js中，而且可以不用管位置如何
-		* webpack就登场了，对模块的引用进行翻译，对引用的文件进行翻译
-	-->
 </html>

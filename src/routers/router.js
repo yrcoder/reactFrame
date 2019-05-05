@@ -1,5 +1,5 @@
 import login from 'views/login';
-import home from 'views/home';
+import app from 'views/app';
 import hellowWorld from 'views/hellowWorld';
 
 export default [
@@ -10,7 +10,7 @@ export default [
 	},
 	{
 		path: '/',
-		component: home,
+		component: app,
 		routes: [
 			{
 				path: '/hellowWorld',

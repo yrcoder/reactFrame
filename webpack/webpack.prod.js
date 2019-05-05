@@ -14,7 +14,6 @@ const prodConfig = {
 		rules: [
 			{
 				test: /\.(le|c)ss$/,
-				include: path.resolve(__dirname, '../src'),
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
@@ -26,10 +25,10 @@ const prodConfig = {
 						},
 					},
 					{
-						loader: 'less-loader',
+						loader: 'postcss-loader',
 					},
 					{
-						loader: 'postcss-loader',
+						loader: 'less-loader',
 					},
 				],
 			},

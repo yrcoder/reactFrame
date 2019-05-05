@@ -58,16 +58,18 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		mainFiles: ['index'],
-		alias: {
-			'@': path.resolve(__dirname, '../src'),
-			...getAlias(),
-		},
+		alias: getAlias(),
 	},
 	module: {
 		rules: [
 			{
 				test: /\.js(x)?$/,
-				include: path.resolve(__dirname, '../src'),
+				// exclude: /node_modules/,
+				// include: [
+				// 	path.resolve(__dirname, '../node_modules/antd'),
+				// 	path.resolve(__dirname, '../src'),
+				// ],
+				include: [path.resolve(__dirname, '../src')],
 				use: [
 					{
 						loader: 'babel-loader',

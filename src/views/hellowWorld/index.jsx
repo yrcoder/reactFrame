@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import viewPage from 'decorator/viewPage';
+// import viewPage from 'decorator/viewPage';
 
-@viewPage({ permissionCode: '/helloWorld' })
+// @viewPage({ permissionCode: '/helloWorld' })
 @inject('commonStore')
 @observer
 class HellowWorld extends Component {

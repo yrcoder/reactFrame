@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.base.js');
 
 const devConfig = {
 	mode: 'development',
-	devtool: 'cheap-module-source-map',
+	devtool: 'source-map',
 	devServer: {
 		// devServer在dist文件夹下起一个服务器，当代码更新的时候自动打包
 		contentBase: path.resolve(__dirname, '../dist'),
@@ -19,7 +19,6 @@ const devConfig = {
 		rules: [
 			{
 				test: /\.(le|c)ss$/,
-				include: path.resolve(__dirname, '../src'),
 				use: [
 					{
 						loader: 'style-loader',
@@ -28,14 +27,13 @@ const devConfig = {
 						loader: 'css-loader',
 						options: {
 							importLoaders: 2,
-							// modules: true,
 						},
 					},
 					{
-						loader: 'less-loader',
+						loader: 'postcss-loader',
 					},
 					{
-						loader: 'postcss-loader',
+						loader: 'less-loader',
 					},
 				],
 			},
