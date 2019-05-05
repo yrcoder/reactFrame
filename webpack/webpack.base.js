@@ -3,9 +3,11 @@ const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 const AddAssetHtmlWbpackPlugin = require('add-asset-html-webpack-plugin');
+// const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const { APIURL, SSOURL } = require('./env');
 
+const NODE_ENV = process.env.NODE_ENV || 'prod';
 const getVendors = () => {
 	const vendorPlugin = [];
 	const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
@@ -27,6 +29,15 @@ const getVendors = () => {
 	});
 	return vendorPlugin;
 };
+const getAlias = () => {
+	const srcFile = fs.readdirSync(path.resolve(__dirname, '../src'));
+	const aliasConfig = {};
+	srcFile.forEach((fileName) => {
+		aliasConfig[fileName] = path.resolve(__dirname, `../src/${fileName}`);
+	});
+	return aliasConfig;
+};
+
 module.exports = {
 	entry: {
 		main: './src/index.jsx',
@@ -49,14 +60,7 @@ module.exports = {
 		mainFiles: ['index'],
 		alias: {
 			'@': path.resolve(__dirname, '../src'),
-			views: path.resolve(__dirname, '../src/views'),
-			stores: path.resolve(__dirname, '../src/stores'),
-			components: path.resolve(__dirname, '../src/components'),
-			decorator: path.resolve(__dirname, '../src/decorator'),
-			styles: path.resolve(__dirname, '../src/styles'),
-			images: path.resolve(__dirname, '../src/images'),
-			constant: path.resolve(__dirname, '../src/constant'),
-			utils: path.resolve(__dirname, '../src/utils'),
+			...getAlias(),
 		},
 	},
 	module: {
@@ -102,7 +106,13 @@ module.exports = {
 			filename: 'index.html',
 		}),
 		new CleanWebpackPlugin(),
+		new webpack.DefinePlugin({
+			NODE_ENV: JSON.stringify(NODE_ENV),
+			APIURL: JSON.stringify(APIURL[NODE_ENV]),
+			SSOURL: JSON.stringify(SSOURL[NODE_ENV]),
+		}),
 		...getVendors(),
-		new WebpackBundleAnalyzer.BundleAnalyzerPlugin(),
+		// 打包分析
+		// new WebpackBundleAnalyzer.BundleAnalyzerPlugin(),
 	],
 };

@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.base.js');
 
 const devConfig = {
 	mode: 'development',
-	devtool: 'inline-source-map',
+	devtool: 'cheap-module-source-map',
 	devServer: {
 		// devServer在dist文件夹下起一个服务器，当代码更新的时候自动打包
 		contentBase: path.resolve(__dirname, '../dist'),

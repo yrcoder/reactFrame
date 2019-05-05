@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Form, Input, Button, message } from 'antd';
-import storage from 'utils/storage';
-import clearMain from 'images/clear-main.png';
+import clearMain from 'images/clearMain.png';
 
 const FormItem = Form.Item;
 
@@ -21,7 +20,7 @@ class NormalLoginForm extends Component {
 		const data = form.getFieldsValue();
 		if (data.username && data.password) {
 			const result = await commonStore.login(data);
-			storage.setItem('Authorization', result.token);
+			sessionStorage.setItem('token', result.token);
 			window.location.replace('/');
 		} else {
 			message.error('请输入账号密码');

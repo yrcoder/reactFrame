@@ -2,7 +2,7 @@ import login from 'views/login';
 import home from 'views/home';
 import hellowWorld from 'views/hellowWorld';
 
-const routes = [
+export default [
 	{
 		path: '/login',
 		component: login,
@@ -19,5 +19,3 @@ const routes = [
 		],
 	},
 ];
-
-export default routes;

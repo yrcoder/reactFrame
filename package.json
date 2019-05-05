@@ -8,19 +8,19 @@
     "*.less"
   ],
   "scripts": {
-    "serve": "webpack-dev-server --env.mode=dev --config ./webpack/webpack.dev.js",
-    "serve:test": "webpack-dev-server --env.mode=test --config ./webpack/webpack.dev.js",
-    "serve:prod": "webpack-dev-server --env.mode=prod --config ./webpack/webpack.dev.js",
-    "build:test": "webpack --env.mode=test --config ./webpack/webpack.prod.js",
-    "build": "webpack --env.mode=prod --config ./webpack/webpack.prod.js",
-    "build:dll": "webpack --config ./webpack/webpack.dll.js",
-    "publish:test": "",
-    "publish": ""
+    "serve": "NODE_ENV=dev webpack-dev-server --config ./webpack/webpack.dev.js",
+    "serve:test": "NODE_ENV=test webpack-dev-server --config ./webpack/webpack.dev.js",
+    "serve:prod": "NODE_ENV=prod webpack-dev-server --config ./webpack/webpack.dev.js",
+    "build:test": "NODE_ENV=test webpack --config ./webpack/webpack.prod.js",
+    "build": "NODE_ENV=prod webpack  --config ./webpack/webpack.prod.js",
+    "build:dll": "webpack --config ./webpack/webpack.dll.js"
   },
   "author": "李月茹",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/polyfill": "^7.4.4",
@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4",
-    "and": "0.0.3",
+    "antd": "^3.16.6",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "lodash": "^4.17.11",
