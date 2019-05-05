@@ -1,17 +1,14 @@
-/**
- * prod,test,dev这些名字是由package.json的命令中传递的
- */
 // API地址
 const APIURL = {
-	prod: 'aaa',
-	test: 'aaa',
-	dev: 'aaa',
+	prod: 'https://loan-sso-web.99gfd.com/loan-sso',
+	test: 'http://192.168.5.109/loan-sso',
+	dev: 'http://192.168.5.109/loan-sso',
 };
 // SSO地址
 const SSOURL = {
-	prod: 'bbb',
-	test: 'bbb',
-	dev: 'bbb',
+	prod: 'http://loan-sso-front.99gfd.com/sso-web',
+	test: 'http://192.168.5.109/sso-web',
+	dev: 'http://192.168.5.109/sso-web',
 };
 
 module.exports = {
