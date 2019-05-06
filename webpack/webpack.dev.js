@@ -4,16 +4,17 @@ const merge = require('webpack-merge');
 const NotifierPlugin = require('friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
 const baseConfig = require('./webpack.base.js');
-const { HOST } = require('./env.js');
+const { HOST, PORT } = require('./env.js');
 
-const port = 4000;
+const host = HOST || 'localhost';
+const port = PORT || 4000;
 const devConfig = {
 	mode: 'development',
 	devtool: 'source-map',
 	devServer: {
 		// devServer在dist文件夹下起一个服务器，当代码更新的时候自动打包
 		contentBase: path.resolve(__dirname, '../dist'),
-		host: HOST,
+		host,
 		port,
 		open: true,
 		hot: true,
@@ -53,7 +54,7 @@ const devConfig = {
 		new webpack.HotModuleReplacementPlugin(),
 		new NotifierPlugin({
 			compilationSuccessInfo: {
-				messages: [`You application is running here http://${HOST}:${port}`],
+				messages: [`You application is running here http://${host}:${port}`],
 			},
 			onErrors: (severity, errors) => {
 				if (severity !== 'error') {

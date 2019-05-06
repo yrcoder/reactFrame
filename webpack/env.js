@@ -1,5 +1,6 @@
 // host:前端服务的IP地址
 const HOST = '192.168.201.220';
+const PORT = 4000;
 // API地址
 const APIURL = {
 	prod: 'https://loan-sso-web.99gfd.com/loan-sso',
@@ -17,4 +18,5 @@ module.exports = {
 	SSOURL,
 	APIURL,
 	HOST,
+	PORT,
 };
