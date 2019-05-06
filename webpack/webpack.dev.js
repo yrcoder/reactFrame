@@ -14,6 +14,8 @@ const devConfig = {
 		hot: true,
 		// eslint报错弹层
 		overlay: true,
+		// 前端路由刷新就没有了
+		historyApiFallback: true,
 	},
 	module: {
 		rules: [

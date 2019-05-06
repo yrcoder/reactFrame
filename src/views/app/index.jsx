@@ -12,19 +12,25 @@ const { SubMenu } = Menu;
 @observer
 class App extends Component {
 	state = {
-		current: '/',
+		selectedKeys: [],
+		firstMenu: '',
 	};
 
 	componentDidMount() {
+		const firstMenu = menus[0].subMenu[0].path;
 		this.setState(
 			{
-				current: menus[0].subMenu[0].path,
+				firstMenu,
 			},
 			() => {
-				this.props.history.push(menus[0].subMenu[0].path);
+				this.setSelectedKeys(firstMenu);
 			},
 		);
 	}
+
+	/**
+	 * header
+	 */
 
 	switchNavMenu = ({ key }) => {
 		if (key === 'logout') {
@@ -32,71 +38,83 @@ class App extends Component {
 		}
 	};
 
-	toRouter = (e) => {
-		console.log(e);
-		this.props.history.push(e.key);
-		this.setState({
-			current: e.key,
-		});
+	renderUser = () => {
+		const title = (
+			<div className="app-header-user">
+				<Avatar icon="user" />
+				<span className="username">张三</span>
+			</div>
+		);
+		return (
+			<Menu mode="horizontal" onClick={this.switchNavMenu} className="app-header-right">
+				<SubMenu title={title}>
+					<Menu.Item key="logout">
+						<Icon type="logout" />
+						退出登录
+					</Menu.Item>
+				</SubMenu>
+			</Menu>
+		);
+	};
+
+	/**
+	 * nav
+	 */
+	setSelectedKeys = (key) => {
+		const { location, history } = this.props;
+		const { firstMenu } = this.state;
+		this.setState(
+			{
+				selectedKeys: [key],
+			},
+			() => {
+				if (location.pathname === '/') {
+					history.replace(firstMenu);
+				} else {
+					history.push(key);
+				}
+			},
+		);
+	};
+
+	renderMenu = () => {
+		const { firstMenu, selectedKeys } = this.state;
+		return (
+			<Menu
+				className="app-nav"
+				defaultSelectedKeys={[firstMenu]}
+				defaultOpenKeys={[menus[0].path]}
+				mode="inline"
+				theme="dark"
+				selectedKeys={selectedKeys}
+				onClick={({ key }) => this.setSelectedKeys(key)}
+			>
+				{menus.map(subMenu => (
+					<SubMenu key={subMenu.path} title={subMenu.title}>
+						{subMenu.subMenu
+							? subMenu.subMenu.map(item => (
+									<Menu.Item key={item.path}>{item.title}</Menu.Item>
+							  ))
+							: ''}
+					</SubMenu>
+				))}
+			</Menu>
+		);
 	};
 
 	render() {
 		const { route } = this.props;
-		const { current } = this.state;
 		return (
 			<div className="app">
 				<header className="app-header">
 					<div className="app-header-left">
 						<img src={logo} alt="LOGO" />
-						<h1 className="logo-text">ABCDEFG</h1>
+						<h1 className="logo-text">零售信贷业务系统</h1>
 					</div>
-					<Menu
-						mode="horizontal"
-						onClick={this.switchNavMenu}
-						className="app-header-right"
-					>
-						<SubMenu
-							title={(
-<div className="app-header-user">
-									<Avatar icon="user" />
-									<span className="username">张三</span>
-</div>
-)}
-						>
-							<Menu.Item key="logout">
-								<Icon type="logout" />
-								退出登录
-							</Menu.Item>
-						</SubMenu>
-					</Menu>
+					{this.renderUser()}
 				</header>
 				<div className="app-content">
-					<Menu
-						className="app-nav"
-						defaultSelectedKeys={[menus[0].subMenu[0].path]}
-						defaultOpenKeys={[menus[0].path]}
-						mode="inline"
-						theme="dark"
-						selectedKeys={[current]}
-						onClick={this.toRouter}
-					>
-						{menus.map(subMenu => (
-							<SubMenu
-								key={subMenu.path}
-								title={(
-<span>
-										<span>{subMenu.title}</span>
-</span>
-)}
-							>
-								{subMenu.subMenu
-									? subMenu.subMenu.map(item => (
-											<Menu.Item key={item.path}>{item.title}</Menu.Item>
-									  ))
-									: ''}
-							</SubMenu>
-						))}
-					</Menu>
+					{this.renderMenu()}
 					<main className="app-main">{renderRoutes(route.routes)}</main>
 				</div>
 			</div>

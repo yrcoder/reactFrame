@@ -4,8 +4,16 @@ const webpack = require('webpack');
 module.exports = {
 	mode: 'production',
 	entry: {
-		lodash: ['lodash'],
-		react: ['react', 'react-dom'],
+		other: ['lodash', 'axios', 'query-string'],
+		react: [
+			'react',
+			'react-dom',
+			'mobx',
+			'mobx-react',
+			'react-router',
+			'react-router-config',
+			'react-router-dom',
+		],
 	},
 	output: {
 		filename: '[name].dll.js',
